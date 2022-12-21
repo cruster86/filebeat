@@ -1,15 +1,14 @@
 stages:
   - deploy
 
-before_script:
-  - echo 'Deploy parameters:'
-  - echo 'CLUSTER_NAME =>' ${CLUSTER_NAME}
-  - echo 'CI_ENVIRONMENT_SLUG =>' ${CI_ENVIRONMENT_SLUG}
-
 .base-filebeat:
   when: manual
   only:
     - master
+  before_script:
+    - echo 'Deploy parameters:'
+    - echo 'CLUSTER_NAME =>' ${CLUSTER_NAME}
+    - echo 'CI_ENVIRONMENT_SLUG =>' ${CI_ENVIRONMENT_SLUG}
   script:
     - chmod +x ./scripts/helm_deploy_and_wait.sh
     - RELEASE_NAME="filebeat-${CI_ENVIRONMENT_SLUG}"
