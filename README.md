@@ -25,8 +25,8 @@ helm del --purge filebeat-stage
 **Секрет для доступ к образам:** 
 
 ```bash
-kubectl -n filebeat-prod get secrets sirius-registry -o yaml
-kubectl -n filebeat-stage get secrets sirius-registry -o yaml
+kubectl -n filebeat-prod get secret sirius-registry -o yaml
+kubectl -n filebeat-stage get secret sirius-registry -o yaml
 ```
 ---
 
