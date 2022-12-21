@@ -1,0 +1,34 @@
+#stages:
+#  - stage
+#  - prod
+#
+#before_script:
+#  - echo 'Deploy parameters:'
+#  - echo 'CLUSTER_NAME =>' ${CLUSTER_NAME}
+#  - echo 'CI_ENVIRONMENT_SLUG =>' ${CI_ENVIRONMENT_SLUG}
+#
+#.base-filebeat:
+#  when: manual
+#  only:
+#    - master
+#  script:
+#    - chmod +x ./scripts/helm_deploy_and_wait.sh
+#    - RELEASE_NAME="filebeat-${CI_ENVIRONMENT_SLUG}"
+#      NAMESPACE="filebeat-${CI_ENVIRONMENT_SLUG}"
+#      CHART="deploy/helm/db-monitor/"
+#      HELM_ARGS="
+#      -f deploy/helm/${CI_ENVIRONMENT_SLUG}/conf/${CLUSTER_NAME}/values.yaml
+#      --atomic
+#      --wait"
+#      ./scripts/helm_deploy_and_wait.sh
+#
+#cpm-dev filebeat deploy:
+#  extends:
+#    - .base-filebeat
+#  stage: stage
+#  environment:
+#    name: stage
+#  variables:
+#    CLUSTER_NAME: "cpm-dev"
+#  tags:
+#    - kube-cpm
