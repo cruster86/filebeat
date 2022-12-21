@@ -5,8 +5,8 @@ maintainers:
   - email: helm-charts@elastic.co
     name: Elastic
 name: filebeat-stage
-version: 17.7.5
-appVersion: 17.7.5
+version: 17.7.3
+appVersion: 17.7.3
 sources:
   - https://github.com/elastic/beats
 icon: https://helm.elastic.co/icons/beats.png
