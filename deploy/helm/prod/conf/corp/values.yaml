@@ -51,10 +51,6 @@ daemonset:
                       - decode_json_fields:
                           fields: ['message']
                           target: json
-                      #- rename:
-                          #fields:
-                            #- from: 'json.msg'
-                              #to: 'json.message'
                       - dissect:
                           when:
                             contains:
