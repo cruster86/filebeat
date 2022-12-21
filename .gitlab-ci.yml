@@ -8,12 +8,15 @@ stages:
     - echo 'CLUSTER_NAME =>' ${CLUSTER_NAME}
     - echo 'CI_ENVIRONMENT_SLUG =>' ${CI_ENVIRONMENT_SLUG}
   script:
+    - set -x
+    - kubectl get ns filebeat-${CI_ENVIRONMENT_SLUG} || kubectl create ns filebeat-${CI_ENVIRONMENT_SLUG}
     - chmod +x ./scripts/helm_deploy_and_wait.sh
     - RELEASE_NAME="filebeat-${CI_ENVIRONMENT_SLUG}"
       NAMESPACE="filebeat-${CI_ENVIRONMENT_SLUG}"
       CHART="deploy/helm/${CI_ENVIRONMENT_SLUG}"
       HELM_ARGS="
       -f deploy/helm/${CI_ENVIRONMENT_SLUG}/conf/${CLUSTER_NAME}/values.yaml
+      --set global.secret="${YC_REGISTRY}"
       --atomic
       --wait"
       ./scripts/helm_deploy_and_wait.sh

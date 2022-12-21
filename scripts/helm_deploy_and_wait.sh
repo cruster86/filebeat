@@ -44,7 +44,7 @@ if [ $counter -eq $release_timeout ]; then
 fi
 
 # Timeout after 20 mins (to leave time for migrations)
-timeout=10
+timeout=20
 counter=0
 
 # While $counter < $timeout

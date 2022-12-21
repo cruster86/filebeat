@@ -182,7 +182,7 @@ hostAliases: []
 #  - "foo.local"
 #  - "bar.local"
 image: "cr.yandex/crpcm9tg75s8gu2hqkp9/filebeat"
-imageTag: "7.17.5"
+imageTag: "7.17.3"
 imagePullPolicy: "IfNotPresent"
 
 imagePullSecrets:
