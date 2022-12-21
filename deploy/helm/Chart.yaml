@@ -4,9 +4,9 @@ home: https://github.com/elastic/helm-charts
 maintainers:
   - email: helm-charts@elastic.co
     name: Elastic
-name: filebeat-{{ .Values.global.env }}
-version: {{ .Values.imageTag }}
-appVersion: {{ .Values.imageTag }}
+name: filebeat-stage
+version: 17.7.5
+appVersion: 17.7.5
 sources:
   - https://github.com/elastic/beats
 icon: https://helm.elastic.co/icons/beats.png

@@ -96,11 +96,11 @@ daemonset:
     privileged: false
   resources:
     limits:
-      cpu: 700m
+      cpu: 500m
       memory: 500Mi
     requests:
-      cpu: 100m
-      memory: 100Mi
+      cpu: 50m
+      memory: 50Mi
 deployment:
   # Annotations to apply to the deployment
   annotations: {}
@@ -154,8 +154,8 @@ deployment:
       cpu: "100m"
       memory: "100Mi"
     limits:
-      cpu: "700m"
-      memory: "500Mi"
+      cpu: "1000m"
+      memory: "200Mi"
   tolerations: []
 
 # Replicas being used for the filebeat deployment
