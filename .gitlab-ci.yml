@@ -31,3 +31,14 @@ cpm-dev filebeat deploy:
     CLUSTER_NAME: "cpm-dev"
   tags:
     - kube-cpm
+
+corp-stage filebeat deploy:
+  extends:
+    - .base-filebeat
+  stage: deploy
+  environment:
+    name: stage
+  variables:
+    CLUSTER_NAME: "corp"
+  tags:
+    - kube-corp
