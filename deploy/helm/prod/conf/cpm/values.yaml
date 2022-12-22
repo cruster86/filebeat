@@ -48,7 +48,7 @@ daemonset:
             when:
               not:
                 regexp:
-                  kubernetes.container.name: 'cache|portal|admin|front|postgres|lab-smt|lab-noo|noo-back|smt-cache|  smt-portal|smt-persist|lab-front|noo-front|auth|cron|elastic|noo-storage|herald|email|cheops-auth'
+                  kubernetes.container.name: 'nginx-ingress-controller|grafana'
       output.elasticsearch:
         host: '${NODE_NAME}'
         hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
@@ -245,7 +245,7 @@ extraVolumeMounts: []
 # such as filebeat.yml for both daemonset and deployment
 filebeatConfig: {}
 nodeSelector:
-  filebeat-ready: "true"
+  node-role: monitoring
 podSecurityContext: {}
 resources: {}
 secretMounts: []

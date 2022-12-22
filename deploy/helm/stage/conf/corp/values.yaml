@@ -35,7 +35,7 @@ daemonset:
             templates:
               - condition:
                   regexp:
-                    kubernetes.namespace: "lab-prod|noo-prod|smt-prod|lab-dev|noo-dev|smt-dev|postgres-stage|postgres-prod|cyrus-dev|cyrus-prod"
+                    kubernetes.namespace: "lab-dev|noo-dev|smt-dev|postgres-stage|cyrus-dev"
                 config:
                   - type: container
                     containers.ids:
