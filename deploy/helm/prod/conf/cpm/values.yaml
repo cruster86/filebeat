@@ -35,7 +35,7 @@ daemonset:
             templates:
               - condition:
                   regexp:
-                    kubernetes.namespace: "prometheus-postgres-exporter|nginx-ingress"
+                    kubernetes.container.name: "missing-container-metrics|grafana"
                 config:
                   - type: container
                     containers.ids:
