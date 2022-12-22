@@ -48,10 +48,10 @@ daemonset:
             when:
               not:
                 regexp:
-                  kubernetes.container.name: 'nginx-ingress-controller|grafana'
+                  kubernetes.container.name: 'elastalert|grafana|herald|kibana'
       output.elasticsearch:
         host: '${NODE_NAME}'
-        hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
+        hosts: '${ELASTICSEARCH_HOSTS:10.112.128.218:9200}'
         filebeat.registry.flush: 2s
   # Only used when updateStrategy is set to "RollingUpdate"
   maxUnavailable: 1
@@ -72,7 +72,7 @@ daemonset:
   resources:
     limits:
       cpu: 500m
-      memory: 200Mi
+      memory: 500Mi
     requests:
       cpu: 100m
       memory: 100Mi
