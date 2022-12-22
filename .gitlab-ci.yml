@@ -34,16 +34,16 @@ cpm-stage filebeat deploy:
   tags:
     - kube-cpm
 
-#cpm-prod filebeat deploy:
-#  extends:
-#    - .base-filebeat
-#  stage: cpm-deploy
-#  environment:
-#    name: prod
-#  variables:
-#    CLUSTER_NAME: "cpm"
-#  tags:
-#    - cpm-yc
+cpm-prod filebeat deploy:
+  extends:
+    - .base-filebeat
+  stage: cpm-deploy
+  environment:
+    name: prod
+  variables:
+    CLUSTER_NAME: "cpm"
+  tags:
+    - cpm-yac
 
 corp-stage filebeat deploy:
   extends:
@@ -56,16 +56,16 @@ corp-stage filebeat deploy:
   tags:
     - kube-corp
 
-#corp-prod filebeat deploy:
-#  extends:
-#    - .base-filebeat
-#  stage: corp-deploy
-#  environment:
-#    name: prod
-#  variables:
-#    CLUSTER_NAME: "corp"
-#  tags:
-#    - kube-corp
+corp-prod filebeat deploy:
+  extends:
+    - .base-filebeat
+  stage: corp-deploy
+  environment:
+    name: prod
+  variables:
+    CLUSTER_NAME: "corp"
+  tags:
+    - kube-corp
 
 univ-stage filebeat deploy:
   extends:
@@ -77,6 +77,17 @@ univ-stage filebeat deploy:
     CLUSTER_NAME: "univ"
   tags:
     - kube-univ
+
+#univ-prod filebeat deploy:
+#  extends:
+#    - .base-filebeat
+#  stage: univ-deploy
+#  environment:
+#    name: prod
+#  variables:
+#    CLUSTER_NAME: "univ"
+#  tags:
+#    - kube-univ
 
 #sirius-stage filebeat deploy:
 #  extends:
