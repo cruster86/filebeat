@@ -29,26 +29,28 @@ daemonset:
   # such as filebeat.yml for daemonset
   filebeatConfig:
     filebeat.yml: |-
-      filebeat.inputs:
-      - type: docker
-        containers.ids:
-        - '*'
-        scan_frequency: 15s
-        ignore_older: 36h
-        close_inactive: 5m
-        close_removed: true
-        clean_removed: true
-        processors:
-        - add_kubernetes_metadata:
-            in_cluster: true
-        - decode_json_fields:
-            fields: ['message']
-            target: json
-        - drop_event:
-            when:
-              not:
-                regexp:
-                  kubernetes.container.name: 'elastalert|grafana|herald|kibana'
+      filebeat.autodiscover:
+        providers:
+          - type: kubernetes
+            templates:
+              - condition:
+                  regexp:
+                    kubernetes.namespace: "prometheus-postgres-exporter|nginx-ingress"
+                config:
+                  - type: container
+                    containers.ids:
+                    - '*'
+                    paths:
+                      - /var/log/containers/*${data.kubernetes.container.id}.log
+                    scan_frequency: 15s
+                    ignore_older: 36h
+                    close_inactive: 5m
+                    close_removed: true
+                    clean_removed: true
+                    processors:
+                      - decode_json_fields:
+                          fields: ['message']
+                          target: json
       output.elasticsearch:
         host: '${NODE_NAME}'
         hosts: '${ELASTICSEARCH_HOSTS:10.112.128.218:9200}'
