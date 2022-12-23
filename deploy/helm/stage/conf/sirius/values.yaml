@@ -29,43 +29,51 @@ daemonset:
   # such as filebeat.yml for daemonset
   filebeatConfig:
     filebeat.yml: |-
-      filebeat.inputs:
-      - type: docker
-        containers.ids:
-        - '*'
-        processors:
-        - add_kubernetes_metadata:
-            in_cluster: true
-        - decode_json_fields:
-            fields: ['message']
-            target: json
-        - drop_event:
-            when:
-              not:
-                regexp:
-                  kubernetes.container.name: 'odyssey|cache|portal|admin|front|postgres|lab-smt|lab-noo|noo-back|smt-cache|smt-portal|smt-persist|lab-front|noo-front|auth|cron|elastic|noo-storage|herald|tracker|telegram'
-        - dissect:
-            when:
-              contains:
-                kubernetes.container.name: odyssey
-            tokenizer: "[%{timestamp}] %{level} %{context} %{database} %{connection} %{message}"
-            field: "message"
-            target_prefix: "json"
-        - drop_event:
-            when:
-              equals:
-                json.context: console
-        - drop_event:
-            when:
-              equals:
-                json.context: auth
-        - drop_event:
-            when:
-              equals:
-                json.level: info
+      filebeat.autodiscover:
+        providers:
+          - type: kubernetes
+            templates:
+              - condition:
+                  regexp:
+                    kubernetes.container.name: "odyssey|cache|portal|admin|front|postgres|lab-smt|lab-noo|noo-back|smt-cache|smt-portal|smt-persist|lab-front|noo-front|auth|cron|elastic|noo-storage|herald|tracker|telegram"
+                config:
+                  - type: container
+                    containers.ids:
+                    - '*'
+                    paths:
+                      - /var/log/containers/*${data.kubernetes.container.id}.log
+                    scan_frequency: 15s
+                    ignore_older: 36h
+                    close_inactive: 5m
+                    close_removed: true
+                    clean_removed: true
+                    processors:
+                      - decode_json_fields:
+                          fields: ['message']
+                          target: json
+                      - dissect:
+                          when:
+                            contains:
+                              kubernetes.container.name: odyssey
+                          tokenizer: "[%{timestamp}] %{level} %{context} %{database} %{connection} %{message}"
+                          field: "message"
+                          target_prefix: "json"
+                      - drop_event:
+                          when:
+                            equals:
+                              json.context: console
+                      - drop_event:
+                          when:
+                            equals:
+                              json.context: auth
+                      - drop_event:
+                          when:
+                            equals:
+                              json.level: info
       output.elasticsearch:
         host: '${NODE_NAME}'
         hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master.logging.svc:9200}'
+        filebeat.registry.flush: 5s
       logging.metrics.enabled: false
   # Only used when updateStrategy is set to "RollingUpdate"
   maxUnavailable: 1
@@ -86,7 +94,7 @@ daemonset:
   resources:
     limits:
       cpu: 500m
-      memory: 200Mi
+      memory: 500Mi
     requests:
       cpu: 100m
       memory: 100Mi
@@ -144,7 +152,7 @@ deployment:
       memory: "100Mi"
     limits:
       cpu: "500m"
-      memory: "200Mi"
+      memory: "500Mi"
   tolerations: []
 
 # Replicas being used for the filebeat deployment
@@ -171,7 +179,7 @@ hostAliases: []
 #  - "foo.local"
 #  - "bar.local"
 image: "cr.yandex/crpcm9tg75s8gu2hqkp9/filebeat"
-imageTag: "7.7.1"
+imageTag: "7.17.3"
 imagePullPolicy: "IfNotPresent"
 
 imagePullSecrets:
