@@ -35,7 +35,7 @@ daemonset:
             templates:
               - condition:
                   regexp:
-                    kubernetes.container.name: "missing-container-metrics|grafana"
+                    kubernetes.container.name: "herald|cron|cyrus"
                 config:
                   - type: container
                     containers.ids:
@@ -239,6 +239,16 @@ updateStrategy: RollingUpdate
 nameOverride: ""
 fullnameOverride: ""
 
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: filebeat-ready
+          operator: In
+          values:
+          - "true"
+
 envFrom: []
 extraEnvs: []
 extraVolumes: []
@@ -246,8 +256,7 @@ extraVolumeMounts: []
 # Allows you to add any config files in /usr/share/filebeat
 # such as filebeat.yml for both daemonset and deployment
 filebeatConfig: {}
-nodeSelector:
-  node-role: monitoring
+nodeSelector: {}
 podSecurityContext: {}
 resources: {}
 secretMounts: []
