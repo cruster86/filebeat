@@ -89,16 +89,16 @@ univ-prod filebeat deploy:
   tags:
     - kube-univ
 
-#sirius-stage filebeat deploy:
-#  extends:
-#    - .base-filebeat
-#  stage: sirius-deploy
-#  environment:
-#    name: stage
-#  variables:
-#    CLUSTER_NAME: "sirius"
-#  tags:
-#    - kube-ci
+sirius-stage filebeat deploy:
+  extends:
+    - .base-filebeat
+  stage: sirius-deploy
+  environment:
+    name: stage
+  variables:
+    CLUSTER_NAME: "sirius"
+  tags:
+    - kube-ci
 
 #sirius-prod filebeat deploy:
 #  extends:
