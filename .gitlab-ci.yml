@@ -2,6 +2,7 @@ stages:
   - cpm-deploy
   - corp-deploy
   - univ-deploy
+  - sirius-deploy
 
 .base-filebeat:
   when: manual
