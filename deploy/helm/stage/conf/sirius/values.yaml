@@ -233,6 +233,14 @@ clusterRoleRules:
       - get
       - list
       - watch
+  - apiGroups:
+      - extensions
+    resourceNames:
+      - filebeat-psp
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - use
 
 podAnnotations:
   {}
@@ -268,6 +276,7 @@ affinity:
           operator: In
           values:
             - stage
+            - postgres
 
 envFrom: []
 extraEnvs: []
