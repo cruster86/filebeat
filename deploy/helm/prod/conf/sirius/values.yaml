@@ -35,7 +35,7 @@ daemonset:
             templates:
               - condition:
                   regexp:
-                    kubernetes.container.name: "elastic|herald|calendar|telegram|tracker|odyssey|postgres"
+                    kubernetes.container.name: "elastic|herald|calendar|telegram|tracker|odyssey|postgres|cheops-auth|cheops-email|cyrus|cron"
                 config:
                   - type: container
                     containers.ids:
@@ -73,6 +73,7 @@ daemonset:
       output.elasticsearch:
         host: '${NODE_NAME}'
         hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master.logging.svc:9200}'
+        filebeat.registry.flush: 2s
       logging.metrics.enabled: false
   # Only used when updateStrategy is set to "RollingUpdate"
   maxUnavailable: 1
