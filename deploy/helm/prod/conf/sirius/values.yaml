@@ -35,7 +35,7 @@ daemonset:
             templates:
               - condition:
                   regexp:
-                    kubernetes.container.name: "elastic|herald|calendar|telegram|tracker|odyssey|postgres|cheops-auth|cheops-email|cyrus|cron"
+                    kubernetes.container.name: "elastic|herald|calendar|telegram|tracker|odyssey|postgres|cheops-auth|cheops-email|cyrus|cron|lab-noo|lab-front|lab-smt"
                 config:
                   - type: container
                     containers.ids:
