@@ -275,6 +275,8 @@ affinity:
           operator: In
           values:
             - monitoring
+            - postgres-failover
+            - prod
 
 envFrom: []
 extraEnvs: []
