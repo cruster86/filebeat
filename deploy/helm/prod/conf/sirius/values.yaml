@@ -35,7 +35,7 @@ daemonset:
             templates:
               - condition:
                   regexp:
-                    kubernetes.container.name: "odyssey|cache|portal|admin|front|postgres|lab-smt|lab-noo|noo-back|smt-cache|smt-portal|smt-persist|lab-front|noo-front|auth|cron|elastic|noo-storage|herald|tracker|telegram"
+                    kubernetes.container.name: "herald|calendar|telegram|tracker|elastic"
                 config:
                   - type: container
                     containers.ids:
@@ -274,8 +274,6 @@ affinity:
         - key: node-role
           operator: In
           values:
-            - postgres-failover
-            - prod
             - monitoring
 
 envFrom: []

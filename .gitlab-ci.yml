@@ -24,6 +24,8 @@ stages:
       --wait"
       ./scripts/helm_deploy_and_wait.sh
 
+############  CPM  ############
+
 cpm-stage filebeat deploy:
   extends:
     - .base-filebeat
@@ -45,6 +47,8 @@ cpm-prod filebeat deploy:
     CLUSTER_NAME: "cpm"
   tags:
     - cpm-yac
+
+############  CORP  ############
 
 corp-stage filebeat deploy:
   extends:
@@ -68,6 +72,8 @@ corp-prod filebeat deploy:
   tags:
     - kube-corp
 
+############  UNIV  ############
+
 univ-stage filebeat deploy:
   extends:
     - .base-filebeat
@@ -90,6 +96,8 @@ univ-prod filebeat deploy:
   tags:
     - kube-univ
 
+############  SIRIUS  ############
+
 sirius-stage filebeat deploy:
   extends:
     - .base-filebeat
@@ -101,13 +109,13 @@ sirius-stage filebeat deploy:
   tags:
     - kube-ci
 
-#sirius-prod filebeat deploy:
-#  extends:
-#    - .base-filebeat
-#  stage: sirius-deploy
-#  environment:
-#    name: prod
-#  variables:
-#    CLUSTER_NAME: "sirius"
-#  tags:
-#    - kube-ci
+sirius-prod filebeat deploy:
+  extends:
+    - .base-filebeat
+  stage: sirius-deploy
+  environment:
+    name: prod
+  variables:
+    CLUSTER_NAME: "sirius"
+  tags:
+    - kube-ci
