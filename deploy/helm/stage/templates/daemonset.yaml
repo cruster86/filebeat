@@ -18,8 +18,12 @@ metadata:
     {{ $key }}: {{ $value | quote }}
     {{- end }}
     {{- end }}
+  {{- if .Values.daemonset.annotations }}
   annotations:
-    checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    {{- range $key, $value := .Values.daemonset.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
 spec:
   selector:
     matchLabels:
