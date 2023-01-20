@@ -2,7 +2,7 @@
 daemonset:
   # Annotations to apply to the daemonset
   annotations:
-    configmap.reloader.stakater.com/reload: filebeat-filebeat-daemonset-config
+    checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
   # additionals labels
   labels: {}
   affinity: {}
