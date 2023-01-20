@@ -19,6 +19,7 @@ stages:
       CHART="deploy/helm/${CI_ENVIRONMENT_SLUG}"
       HELM_ARGS="
       -f deploy/helm/${CI_ENVIRONMENT_SLUG}/conf/${CLUSTER_NAME}/values.yaml
+      -f deploy/helm/${CI_ENVIRONMENT_SLUG}/conf/${CLUSTER_NAME}/config.yaml
       --set global.secret="${YC_REGISTRY}"
       --atomic
       --wait"
