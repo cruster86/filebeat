@@ -1,8 +1,7 @@
 ---
 daemonset:
   # Annotations to apply to the daemonset
-  annotations:
-    configmap.reloader.stakater.com/reload: filebeat-filebeat-daemonset-config
+  annotations: {}
   # additionals labels
   labels: {}
   affinity: {}
@@ -27,34 +26,7 @@ daemonset:
   hostNetworking: false
   # Allows you to add any config files in /usr/share/filebeat
   # such as filebeat.yml for daemonset
-  filebeatConfig:
-    filebeat.yml: |-
-      filebeat.autodiscover:
-        providers:
-          - type: kubernetes
-            templates:
-              - condition:
-                  regexp:
-                    kubernetes.container.name: "herald|cron|cyrus|cheops-auth|cheops-email|lab-front|lab-noo|lab-smt|noo-back|noo-front|noo-storage|smt-cache|smt-front|smt-noo-front|smt-persist|smt-portal"
-                config:
-                  - type: container
-                    containers.ids:
-                    - '*'
-                    paths:
-                      - /var/log/containers/*${data.kubernetes.container.id}.log
-                    scan_frequency: 15s
-                    ignore_older: 36h
-                    close_inactive: 5m
-                    close_removed: true
-                    clean_removed: true
-                    processors:
-                      - decode_json_fields:
-                          fields: ['message']
-                          target: json
-      output.elasticsearch:
-        host: '${NODE_NAME}'
-        hosts: '${ELASTICSEARCH_HOSTS:10.112.128.218:9200}'
-        filebeat.registry.flush: 2s
+  filebeatConfig: {}
   # Only used when updateStrategy is set to "RollingUpdate"
   maxUnavailable: 1
   nodeSelector: {}

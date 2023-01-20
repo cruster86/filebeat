@@ -1,8 +1,7 @@
 ---
 daemonset:
   # Annotations to apply to the daemonset
-  annotations:
-    configmap.reloader.stakater.com/reload: filebeat-filebeat-daemonset-config
+  annotations: {}
   # additionals labels
   labels: {}
   affinity: {}
@@ -27,53 +26,7 @@ daemonset:
   hostNetworking: false
   # Allows you to add any config files in /usr/share/filebeat
   # such as filebeat.yml for daemonset
-  filebeatConfig:
-    filebeat.yml: |-
-      filebeat.autodiscover:
-        providers:
-          - type: kubernetes
-            templates:
-              - condition:
-                  regexp:
-                    kubernetes.namespace: "lab-prod|noo-prod|smt-prod|postgres-prod|cyrus-prod"
-                config:
-                  - type: container
-                    containers.ids:
-                    - '*'
-                    paths:
-                      - /var/log/containers/*${data.kubernetes.container.id}.log
-                    scan_frequency: 15s
-                    ignore_older: 36h
-                    close_inactive: 5m
-                    close_removed: true
-                    clean_removed: true
-                    processors:
-                      - decode_json_fields:
-                          fields: ['message']
-                          target: json
-                      - dissect:
-                          when:
-                            contains:
-                              kubernetes.container.name: odyssey
-                          tokenizer: "[%{timestamp}] %{level} %{context} %{database} %{connection} %{message}"
-                          field: "message"
-                          target_prefix: "json"
-                      - drop_event:
-                          when:
-                            equals:
-                              json.context: console
-                      - drop_event:
-                          when:
-                            equals:
-                              json.context: auth
-                      - drop_event:
-                          when:
-                            equals:
-                              json.level: info
-      output.elasticsearch:
-        host: '${NODE_NAME}'
-        hosts: '${ELASTICSEARCH_HOSTS:10.43.175.211:9200}'
-        filebeat.registry.flush: 5s
+  filebeatConfig: {}
   # Only used when updateStrategy is set to "RollingUpdate"
   maxUnavailable: 1
   nodeSelector: {}
