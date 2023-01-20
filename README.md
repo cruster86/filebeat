@@ -7,12 +7,16 @@
     │       │   ├── Chart.yaml
     │       │   ├── conf
     │       │   │   ├── corp
+    │       │   │   │   ├── config.yaml
     │       │   │   │   └── values.yaml
     │       │   │   ├── cpm
+    │       │   │   │   ├── config.yaml
     │       │   │   │   └── values.yaml
     │       │   │   ├── sirius
+    │       │   │   │   ├── config.yaml
     │       │   │   │   └── values.yaml
     │       │   │   └── univ
+    │       │   │   │   ├── config.yaml
     │       │   │       └── values.yaml
     │       │   ├── templates
     │       │   │   ├── _helpers.tpl
@@ -30,12 +34,16 @@
     │           ├── Chart.yaml
     │           ├── conf
     │           │   ├── corp
+    │           │   │   ├── config.yaml
     │           │   │   └── values.yaml
     │           │   ├── cpm-dev
+    │           │   │   ├── config.yaml
     │           │   │   └── values.yaml
     │           │   ├── sirius
+    │           │   │   ├── config.yaml
     │           │   │   └── values.yaml
     │           │   └── univ
+    │           │       ├── config.yaml
     │           │       └── values.yaml
     │           ├── templates
     │           │   ├── _helpers.tpl
@@ -53,13 +61,14 @@
         └── helm_deploy_and_wait.sh
 </details>
 
----
+<details><summary>Настройки:</summary>
 
-Версия filbeat для stage: 7.17.3
+  - Настройка конфига: `conf/${CLUSTER_NAME}/config.yaml`
+  - Настройка параметров: `conf/${CLUSTER_NAME}/values.yaml`
 
-Версия filbeat для prod: 7.17.5
-
-Настройки `filebeatConfig` находятся в `deploy/helm/prod/conf/${CLUSTER_NAME}/values.yaml` (для каждого кластера)
+  - Версия filbeat для stage: `7.17.3`
+  - Версия filbeat для prod: `7.17.5`
+</details>
 
 ---
 
