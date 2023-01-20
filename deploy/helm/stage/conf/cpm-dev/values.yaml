@@ -1,8 +1,7 @@
 ---
 daemonset:
   # Annotations to apply to the daemonset
-  annotations:
-    checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+  annotations: {}
   # additionals labels
   labels: {}
   affinity: {}
