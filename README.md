@@ -27,7 +27,7 @@
     │       │   │   ├── deployment.yaml
     │       │   │   ├── role.yaml
     │       │   │   ├── rolebinding.yaml
-    │       │   │   ├── secrert.yaml
+    │       │   │   ├── secret.yaml
     │       │   │   └── serviceaccount.yaml
     │       │   └── values.yaml
     │       └── stage
@@ -80,6 +80,13 @@
 helm install --name filebeat-prod --namespace filebeat-prod deploy/helm/stage/ -f deploy/helm/stage/conf/${CLUSTER_NAME}/values.yaml
 
 helm install --name filebeat-stage --namespace filebeat-stage deploy/helm/prod/ -f deploy/helm/prod/conf/${CLUSTER_NAME}/values.yaml
+```
+
+**Посмотреть релизы в неймспейсах:**
+
+```bash
+helm list --namespace filebeat-prod
+helm list --namespace filebeat-stage
 ```
 
 **Обновить релиз:**
