@@ -130,12 +130,15 @@ hostAliases: []
 #  hostnames:
 #  - "foo.local"
 #  - "bar.local"
-image: "cr.yandex/crpcm9tg75s8gu2hqkp9/filebeat"
+
+#image: "cr.yandex/crpcm9tg75s8gu2hqkp9/filebeat"
+image: "registry.sirius.online/infra/filebeat"
 imageTag: "7.17.3"
 imagePullPolicy: "IfNotPresent"
 
 imagePullSecrets:
 - name: sirius-registry
+- name: gitlab-registry
 
 livenessProbe:
   exec:
