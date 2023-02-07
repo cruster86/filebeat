@@ -25,6 +25,6 @@ daemonset:
                           target: json
       output.elasticsearch:
         host: '${NODE_NAME}'
-        hosts: '${ELASTICSEARCH_HOSTS:10.112.128.218:9200}'
+        hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master.logging.svc:9200}'
         filebeat.registry.flush: 2s
       logging.metrics.enabled: false
