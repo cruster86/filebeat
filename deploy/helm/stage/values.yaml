@@ -103,14 +103,6 @@ deployment:
       memory: "200Mi"
   tolerations: []
 
-#image: ""
-#
-#imageTag: ""
-#
-#imagePullPolicy: ""
-#
-#imagePullSecrets: []
-
 # Replicas being used for the filebeat deployment
 replicas: 1
 
@@ -129,6 +121,7 @@ dnsConfig: {}
 # options:
 #   - name: ndots
 #     value: "2"
+
 hostAliases: []
 #- ip: "127.0.0.1"
 #  hostnames:
@@ -215,6 +208,7 @@ serviceAccountAnnotations:
 
 # How long to wait for Filebeat pods to stop gracefully
 terminationGracePeriod: 30
+
 # This is the PriorityClass settings as defined in
 # https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
 priorityClassName: ""
@@ -224,6 +218,7 @@ updateStrategy: RollingUpdate
 # Override various naming aspects of this chart
 # Only edit these if you know what you're doing
 nameOverride: ""
+
 fullnameOverride: ""
 
 envFrom: []
