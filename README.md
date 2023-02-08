@@ -8,7 +8,9 @@
 Конфигурация деплоя находится в: `.gitlab-ci.yaml`
 
 Особенности установки:
-  
+
+  - Дополнительно создаётся psp-конфигурация. Она передаётся в правила для ClusterRole через праметр clusterRoleRules.
+
 ---
 
 Upstream проект: https://github.com/elastic/helm-charts/tree/main/filebeat
