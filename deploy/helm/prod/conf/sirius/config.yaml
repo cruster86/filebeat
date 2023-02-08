@@ -1,3 +1,4 @@
+# Add config file filebeat.yml for daemonset in /usr/share/filebeat
 daemonset:
   filebeatConfig:
     filebeat.yml: |-
