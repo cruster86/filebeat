@@ -1,12 +1,4 @@
 ---
-#image: ""
-#
-#imageTag: ""
-#
-#imagePullPolicy: ""
-#
-#imagePullSecrets: []
-
 daemonset:
   # Annotations to apply to the daemonset
   annotations: {}
