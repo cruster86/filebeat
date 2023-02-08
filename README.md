@@ -8,10 +8,6 @@
 Конфигурация деплоя находится в: `.gitlab-ci.yaml`
 
 Особенности установки:
-
-- кластер Sirius:
-  
-  включить ```managedServiceAccount: true``` для создания service account, role, role binding
   
 ---
 
