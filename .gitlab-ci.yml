@@ -1,8 +1,8 @@
 stages:
-  - cpm-deploy
-  - corp-deploy
-  - univ-deploy
-  - sirius-deploy
+  - cpm
+  - corp
+  - univ
+  - sirius
 
 .base-filebeat:
   when: manual
@@ -11,7 +11,6 @@ stages:
     - echo 'CLUSTER_NAME =>' ${CLUSTER_NAME}
     - echo 'CI_ENVIRONMENT_SLUG =>' ${CI_ENVIRONMENT_SLUG}
   script:
-    - set -x
     - kubectl get ns filebeat-${CI_ENVIRONMENT_SLUG} || kubectl create ns filebeat-${CI_ENVIRONMENT_SLUG}
     - chmod +x ./scripts/helm_deploy_and_wait.sh
     - RELEASE_NAME="filebeat-${CI_ENVIRONMENT_SLUG}"
@@ -28,10 +27,10 @@ stages:
 
 ############  CPM  ############
 
-cpm-stage filebeat deploy:
+cpm filebeat stage:
   extends:
     - .base-filebeat
-  stage: cpm-deploy
+  stage: cpm
   environment:
     name: stage
   variables:
@@ -39,10 +38,10 @@ cpm-stage filebeat deploy:
   tags:
     - kube-cpm
 
-cpm-prod filebeat deploy:
+cpm filebeat prod:
   extends:
     - .base-filebeat
-  stage: cpm-deploy
+  stage: cpm
   environment:
     name: prod
   variables:
@@ -52,10 +51,10 @@ cpm-prod filebeat deploy:
 
 ############  CORP  ############
 
-corp-stage filebeat deploy:
+corp filebeat stage:
   extends:
     - .base-filebeat
-  stage: corp-deploy
+  stage: corp
   environment:
     name: stage
   variables:
@@ -63,10 +62,10 @@ corp-stage filebeat deploy:
   tags:
     - kube-corp
 
-corp-prod filebeat deploy:
+corp filebeat prod:
   extends:
     - .base-filebeat
-  stage: corp-deploy
+  stage: corp
   environment:
     name: prod
   variables:
@@ -76,10 +75,10 @@ corp-prod filebeat deploy:
 
 ############  UNIV  ############
 
-univ-stage filebeat deploy:
+univ filebeat stage:
   extends:
     - .base-filebeat
-  stage: univ-deploy
+  stage: univ
   environment:
     name: stage
   variables:
@@ -87,10 +86,10 @@ univ-stage filebeat deploy:
   tags:
     - kube-univ
 
-univ-prod filebeat deploy:
+univ filebeat prod:
   extends:
     - .base-filebeat
-  stage: univ-deploy
+  stage: univ
   environment:
     name: prod
   variables:
@@ -100,10 +99,10 @@ univ-prod filebeat deploy:
 
 ############  SIRIUS  ############
 
-sirius-stage filebeat deploy:
+sirius filebeat stage:
   extends:
     - .base-filebeat
-  stage: sirius-deploy
+  stage: sirius
   environment:
     name: stage
   variables:
@@ -111,10 +110,10 @@ sirius-stage filebeat deploy:
   tags:
     - kube-ci
 
-sirius-prod filebeat deploy:
+sirius filebeat prod:
   extends:
     - .base-filebeat
-  stage: sirius-deploy
+  stage: sirius
   environment:
     name: prod
   variables:
