@@ -2,30 +2,25 @@
 daemonset:
   resources:
     limits:
-      cpu: 500m
+      cpu: 300m
       memory: 500Mi
     requests:
-      cpu: 100m
-      memory: 100Mi
+      cpu: 50m
+      memory: 50Mi
 
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: filebeat-ready
+        - key: node-role
           operator: In
           values:
-          - "true"
+          - postgres
+          - prod
 
 tolerations:
 - effect: NoSchedule
-  operator: Exists
-- key: CriticalAddonsOnly
-  operator: Exists
-- effect: NoExecute
-  operator: Exists
-- effect: NoSchedule
   key: node-role
   operator: Equal
-  value: stage
+  value: postgres-prod

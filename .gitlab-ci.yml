@@ -15,12 +15,12 @@ stages:
     - chmod +x ./scripts/helm_deploy_and_wait.sh
     - RELEASE_NAME="filebeat-${CI_ENVIRONMENT_SLUG}"
       NAMESPACE="filebeat-${CI_ENVIRONMENT_SLUG}"
-      CHART="deploy/helm/${CI_ENVIRONMENT_SLUG}"
+      CHART="chart/${CI_ENVIRONMENT_SLUG}"
       HELM_ARGS="
-      -f deploy/helm/${CI_ENVIRONMENT_SLUG}/conf/${CLUSTER_NAME}/values.yaml
-      -f deploy/helm/${CI_ENVIRONMENT_SLUG}/conf/${CLUSTER_NAME}/config.yaml
+      -f chart/${CI_ENVIRONMENT_SLUG}/conf/${CLUSTER_NAME}/values.yaml
+      -f chart/${CI_ENVIRONMENT_SLUG}/conf/${CLUSTER_NAME}/config.yaml
       --set global.yc_secret="${YC_REGISTRY}"
-      --set global.gitlab_secret="${GITLAB_REGISTRY}"
+      --set global.gitlab_secret="${INFRA_REGISTRY}"
       --atomic
       --wait"
       ./scripts/helm_deploy_and_wait.sh

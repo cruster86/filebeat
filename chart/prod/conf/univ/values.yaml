@@ -26,4 +26,3 @@ tolerations:
   key: node-role
   operator: Equal
   value: postgres
-

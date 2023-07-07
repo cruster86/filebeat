@@ -13,12 +13,10 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: node-role
+        - key: filebeat-ready
           operator: In
           values:
-            - monitoring
-            - postgres-failover
-            - prod
+          - "true"
 
 tolerations:
 - effect: NoSchedule
@@ -27,3 +25,7 @@ tolerations:
   operator: Exists
 - effect: NoExecute
   operator: Exists
+- effect: NoSchedule
+  key: node-role
+  operator: Equal
+  value: stage

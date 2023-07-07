@@ -2,11 +2,11 @@
 daemonset:
   resources:
     limits:
-      cpu: 300m
+      cpu: 500m
       memory: 500Mi
     requests:
-      cpu: 50m
-      memory: 50Mi
+      cpu: 100m
+      memory: 100Mi
 
 affinity:
   nodeAffinity:
@@ -16,11 +16,14 @@ affinity:
         - key: node-role
           operator: In
           values:
-          - postgres
-          - prod
+            - monitoring
+            - postgres-failover
+            - prod
 
 tolerations:
 - effect: NoSchedule
-  key: node-role
-  operator: Equal
-  value: postgres-prod
+  operator: Exists
+- key: CriticalAddonsOnly
+  operator: Exists
+- effect: NoExecute
+  operator: Exists

@@ -235,6 +235,8 @@ labels: {}
 
 nodeSelector: {}
 
+podSecurityPolicy: true
+
 podSecurityContext: {}
 
 resources: {}
