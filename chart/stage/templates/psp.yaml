@@ -1,3 +1,4 @@
+{{- if .Values.podSecurityPolicy }}
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
@@ -23,3 +24,4 @@ spec:
     rule: RunAsAny
   volumes:
   - '*'
+{{- end -}}

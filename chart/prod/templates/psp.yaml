@@ -1,4 +1,4 @@
-{{- if .Values.managedServiceAccount }}
+{{- if .Values.podSecurityPolicy }}
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
