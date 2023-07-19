@@ -8,7 +8,7 @@ daemonset:
             templates:
               - condition:
                   regexp:
-                    kubernetes.container.name: "cheops-auth|cheops-email|cron|lab-noo|lab-front|lab-smt|calendar|telegram|tracker|passport|staff|process-tms|cyrus|smt-cache|smt-front|smt-noo-front|smt-persist|smt-portal|noo-back|noo-front|noo-storage|odyssey|postgres"
+                    kubernetes.container.name: "cheops-auth|cheops-email|cron|lab-noo|lab-front|lab-smt|calendar|telegram|tracker|passport|staff|process-tms|vk|cyrus|smt-cache|smt-front|smt-noo-front|smt-persist|smt-portal|noo-back|noo-front|noo-storage|odyssey|postgres"
                 config:
                   - type: container
                     containers.ids:
