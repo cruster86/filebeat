@@ -1,8 +1,8 @@
 stages:
-  - cpm
   - corp
   - univ
   - sirius
+#  - cpm
 
 .base-filebeat:
   when: manual
@@ -27,27 +27,27 @@ stages:
 
 ############  CPM  ############
 
-cpm filebeat stage:
-  extends:
-    - .base-filebeat
-  stage: cpm
-  environment:
-    name: stage
-  variables:
-    CLUSTER_NAME: "cpm-dev"
-  tags:
-    - kube-cpm
-
-cpm filebeat prod:
-  extends:
-    - .base-filebeat
-  stage: cpm
-  environment:
-    name: prod
-  variables:
-    CLUSTER_NAME: "cpm"
-  tags:
-    - cpm-yac
+#cpm filebeat stage:
+#  extends:
+#    - .base-filebeat
+#  stage: cpm
+#  environment:
+#    name: stage
+#  variables:
+#    CLUSTER_NAME: "cpm-dev"
+#  tags:
+#    - kube-cpm
+#
+#cpm filebeat prod:
+#  extends:
+#    - .base-filebeat
+#  stage: cpm
+#  environment:
+#    name: prod
+#  variables:
+#    CLUSTER_NAME: "cpm"
+#  tags:
+#    - cpm-yac
 
 ############  CORP  ############
 
