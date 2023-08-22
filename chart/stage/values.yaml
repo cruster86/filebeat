@@ -243,3 +243,7 @@ podSecurityContext: {}
 resources: {}
 
 secretMounts: []
+
+# Включаем ли мы секреты
+secrets:
+  enabled: true
