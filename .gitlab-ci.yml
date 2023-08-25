@@ -20,7 +20,7 @@ stages:
       -f chart/${CI_ENVIRONMENT_SLUG}/conf/${CLUSTER_NAME}/config.yaml
       --set global.yc_secret="${YC_REGISTRY}"
       --set global.gitlab_secret="${INFRA_REGISTRY}"
-      --debug"
+      --debug --dry-run"
       ./scripts/helm_deploy_and_wait.sh
 
 ############  CPM  ############

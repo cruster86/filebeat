@@ -20,8 +20,7 @@ affinity:
           - db-stage
 
 imagePullSecrets:
-- name: sirius-registry
-- name: gitlab-registry
+- name: infra-registry
 
 tolerations:
 - effect: NoSchedule
@@ -32,3 +31,6 @@ tolerations:
   key: node-role
   operator: Equal
   value: stage
+
+secrets:
+  enabled: false
