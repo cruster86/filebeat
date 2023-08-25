@@ -16,12 +16,11 @@ affinity:
         - key: node-role
           operator: In
           values:
-          - stage
           - postgres
+          - stage
 
 imagePullSecrets:
-- name: sirius-registry
-- name: gitlab-registry
+- name: infra-registry
 
 tolerations:
 - effect: NoSchedule
@@ -32,3 +31,6 @@ tolerations:
   key: app
   operator: Equal
   value: postgres
+
+secrets:
+  enabled: false
