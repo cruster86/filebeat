@@ -48,3 +48,4 @@ daemonset:
         hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master.logging.svc:9200}'
         filebeat.registry.flush: 2s
       logging.metrics.enabled: false
+      logging.level: warning
