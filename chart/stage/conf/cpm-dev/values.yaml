@@ -20,6 +20,10 @@ affinity:
           - postgres-failover
           - stage
 
+imagePullSecrets:
+- name: sirius-registry
+- name: gitlab-registry
+
 tolerations:
 - effect: NoSchedule
   key: node-role

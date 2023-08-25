@@ -19,6 +19,10 @@ affinity:
           - postgres
           - prod
 
+imagePullSecrets:
+- name: sirius-registry
+- name: gitlab-registry
+
 tolerations:
 - effect: NoSchedule
   key: node-role

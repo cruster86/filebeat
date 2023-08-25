@@ -20,6 +20,10 @@ affinity:
             - postgres-failover
             - prod
 
+imagePullSecrets:
+- name: sirius-registry
+- name: gitlab-registry
+
 tolerations:
 - effect: NoSchedule
   operator: Exists

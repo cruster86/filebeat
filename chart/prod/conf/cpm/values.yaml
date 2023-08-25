@@ -18,6 +18,10 @@ affinity:
           values:
           - "true"
 
+imagePullSecrets:
+- name: sirius-registry
+- name: gitlab-registry
+
 tolerations:
 - effect: NoSchedule
   operator: Exists

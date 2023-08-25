@@ -131,9 +131,7 @@ image: "registry.sirius.online/infra/filebeat"
 imageTag: "7.17.9"
 imagePullPolicy: "IfNotPresent"
 
-imagePullSecrets:
-- name: sirius-registry
-- name: gitlab-registry
+imagePullSecrets: []
 
 livenessProbe:
   exec:

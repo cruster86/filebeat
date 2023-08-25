@@ -19,6 +19,10 @@ affinity:
           - app-stage-1
           - db-stage
 
+imagePullSecrets:
+- name: sirius-registry
+- name: gitlab-registry
+
 tolerations:
 - effect: NoSchedule
   key: node-role
