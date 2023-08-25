@@ -21,8 +21,7 @@ affinity:
             - prod
 
 imagePullSecrets:
-- name: sirius-registry
-- name: gitlab-registry
+- name: infra-registry
 
 tolerations:
 - effect: NoSchedule
@@ -31,3 +30,6 @@ tolerations:
   operator: Exists
 - effect: NoExecute
   operator: Exists
+
+secrets:
+  enabled: false
