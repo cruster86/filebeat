@@ -20,11 +20,13 @@ affinity:
           - prod
 
 imagePullSecrets:
-- name: sirius-registry
-- name: gitlab-registry
+- name: infra-registry
 
 tolerations:
 - effect: NoSchedule
   key: node-role
   operator: Equal
   value: postgres-prod
+
+secrets:
+  enabled: false

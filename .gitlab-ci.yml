@@ -2,7 +2,6 @@ stages:
   - corp
   - univ
   - sirius
-#  - cpm
 
 .base-filebeat:
   when: manual
@@ -11,18 +10,17 @@ stages:
     - echo 'CLUSTER_NAME =>' ${CLUSTER_NAME}
     - echo 'CI_ENVIRONMENT_SLUG =>' ${CI_ENVIRONMENT_SLUG}
   script:
-    - kubectl get ns filebeat-${CI_ENVIRONMENT_SLUG} || kubectl create ns filebeat-${CI_ENVIRONMENT_SLUG}
+    - kubectl get ns logging || kubectl create ns logging
     - chmod +x ./scripts/helm_deploy_and_wait.sh
     - RELEASE_NAME="filebeat-${CI_ENVIRONMENT_SLUG}"
-      NAMESPACE="filebeat-${CI_ENVIRONMENT_SLUG}"
+      NAMESPACE="logging"
       CHART="chart/${CI_ENVIRONMENT_SLUG}"
       HELM_ARGS="
       -f chart/${CI_ENVIRONMENT_SLUG}/conf/${CLUSTER_NAME}/values.yaml
       -f chart/${CI_ENVIRONMENT_SLUG}/conf/${CLUSTER_NAME}/config.yaml
       --set global.yc_secret="${YC_REGISTRY}"
       --set global.gitlab_secret="${INFRA_REGISTRY}"
-      --atomic
-      --wait"
+      --debug --dry-run"
       ./scripts/helm_deploy_and_wait.sh
 
 ############  CPM  ############
