@@ -23,19 +23,6 @@ stages:
       --debug"
       ./scripts/helm_deploy_and_wait.sh
 
-############  CPM  ############
-
-#cpm filebeat stage:
-#  extends:
-#    - .base-filebeat
-#  stage: cpm
-#  environment:
-#    name: stage
-#  variables:
-#    CLUSTER_NAME: "cpm-dev"
-#  tags:
-#    - kube-cpm
-
 ############  CORP  ############
 
 corp filebeat stage:
