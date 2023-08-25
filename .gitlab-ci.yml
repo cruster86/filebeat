@@ -37,17 +37,6 @@ stages:
 #    CLUSTER_NAME: "cpm-dev"
 #  tags:
 #    - kube-cpm
-#
-#cpm filebeat prod:
-#  extends:
-#    - .base-filebeat
-#  stage: cpm
-#  environment:
-#    name: prod
-#  variables:
-#    CLUSTER_NAME: "cpm"
-#  tags:
-#    - cpm-yac
 
 ############  CORP  ############
 
