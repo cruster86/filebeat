@@ -1,7 +1,6 @@
 stages:
-  - corp
-  - univ
   - sirius
+  - univ
 
 .base-filebeat:
   when: manual
@@ -22,54 +21,6 @@ stages:
       --set global.gitlab_secret="${INFRA_REGISTRY}"
       --debug"
       ./scripts/helm_deploy_and_wait.sh
-
-############  CORP  ############
-
-corp filebeat stage:
-  extends:
-    - .base-filebeat
-  stage: corp
-  environment:
-    name: stage
-  variables:
-    CLUSTER_NAME: "corp"
-  tags:
-    - kube-corp
-
-corp filebeat prod:
-  extends:
-    - .base-filebeat
-  stage: corp
-  environment:
-    name: prod
-  variables:
-    CLUSTER_NAME: "corp"
-  tags:
-    - kube-corp
-
-############  UNIV  ############
-
-univ filebeat stage:
-  extends:
-    - .base-filebeat
-  stage: univ
-  environment:
-    name: stage
-  variables:
-    CLUSTER_NAME: "univ"
-  tags:
-    - kube-univ
-
-univ filebeat prod:
-  extends:
-    - .base-filebeat
-  stage: univ
-  environment:
-    name: prod
-  variables:
-    CLUSTER_NAME: "univ"
-  tags:
-    - kube-univ
 
 ############  SIRIUS  ############
 
@@ -94,3 +45,27 @@ sirius filebeat prod:
     CLUSTER_NAME: "sirius"
   tags:
     - kube-ci
+
+############  UNIV  ############
+
+univ filebeat stage:
+  extends:
+    - .base-filebeat
+  stage: univ
+  environment:
+    name: stage
+  variables:
+    CLUSTER_NAME: "univ"
+  tags:
+    - kube-univ
+
+univ filebeat prod:
+  extends:
+    - .base-filebeat
+  stage: univ
+  environment:
+    name: prod
+  variables:
+    CLUSTER_NAME: "univ"
+  tags:
+    - kube-univ
