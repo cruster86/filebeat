@@ -1,6 +1,5 @@
 stages:
   - sirius
-  - univ
 
 .base-filebeat:
   when: manual
@@ -9,7 +8,6 @@ stages:
     - echo 'CLUSTER_NAME =>' ${CLUSTER_NAME}
     - echo 'CI_ENVIRONMENT_SLUG =>' ${CI_ENVIRONMENT_SLUG}
   script:
-    - kubectl get ns logging || kubectl create ns logging
     - chmod +x ./scripts/helm_deploy_and_wait.sh
     - RELEASE_NAME="filebeat-${CI_ENVIRONMENT_SLUG}"
       NAMESPACE="logging"
@@ -45,27 +43,3 @@ sirius filebeat prod:
     CLUSTER_NAME: "sirius"
   tags:
     - kube-ci
-
-############  UNIV  ############
-
-univ filebeat stage:
-  extends:
-    - .base-filebeat
-  stage: univ
-  environment:
-    name: stage
-  variables:
-    CLUSTER_NAME: "univ"
-  tags:
-    - kube-univ
-
-univ filebeat prod:
-  extends:
-    - .base-filebeat
-  stage: univ
-  environment:
-    name: prod
-  variables:
-    CLUSTER_NAME: "univ"
-  tags:
-    - kube-univ
