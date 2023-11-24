@@ -8,7 +8,7 @@ daemonset:
             templates:
               - condition:
                   regexp:
-                    kubernetes.container.name: "invite-helper|cheops-auth|cheops-email|cron|lab-noo|lab-front|lab-smt|rob-|cyrus|smt-cache|smt-front|smt-noo-front|smt-persist|smt-portal|noo-back|noo-front|noo-storage|odyssey|postgres"
+                    kubernetes.container.name: "odyssey"
                 config:
                   - type: container
                     containers.ids:
@@ -16,7 +16,7 @@ daemonset:
                     paths:
                       - /var/log/containers/*${data.kubernetes.container.id}.log
                     scan_frequency: 15s
-                    ignore_older: 36h
+                    ignore_older: 2h
                     close_inactive: 5m
                     close_removed: true
                     clean_removed: true
@@ -33,16 +33,11 @@ daemonset:
                           target_prefix: "json"
                       - drop_event:
                           when:
-                            equals:
-                              json.context: console
-                      - drop_event:
-                          when:
-                            equals:
-                              json.context: auth
-                      - drop_event:
-                          when:
-                            equals:
-                              json.level: info
+                            or:
+                            - regexp:
+                                json.context: "auth|console"
+                            - regexp:
+                                json.level: "LOG|INFO|info"
       output.elasticsearch:
         host: '${NODE_NAME}'
         hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master.logging.svc:9200}'

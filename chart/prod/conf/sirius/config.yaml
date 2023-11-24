@@ -16,7 +16,7 @@ daemonset:
                     paths:
                       - /var/log/containers/*${data.kubernetes.container.id}.log
                     scan_frequency: 15s
-                    ignore_older: 36h
+                    ignore_older: 2h
                     close_inactive: 5m
                     close_removed: true
                     clean_removed: true
