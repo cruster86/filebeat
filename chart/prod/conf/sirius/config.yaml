@@ -8,7 +8,7 @@ daemonset:
             templates:
               - condition:
                   regexp:
-                    kubernetes.container.name: "invite-helper|elastic|herald|rob-|odyssey|postgres|cheops-auth|cheops-email|cyrus|cron|lab-noo|lab-front|lab-smt|noo-back|noo-front|noo-storage|smt-cache|smt-front|smt-noo-front|smt-persist|smt-portal"
+                    kubernetes.namespace: "postgres-prod|postgres-failover"
                 config:
                   - type: container
                     containers.ids:
@@ -27,25 +27,48 @@ daemonset:
                       - dissect:
                           when:
                             contains:
+                              kubernetes.container.name: postgres
+                          tokenizer: "%{timestamp} %{+timestamp} %{+timestamp} [%{id}] %{level}: %{message}"
+                          field: "message"
+                          target_prefix: "json"
+                      - dissect:
+                          when:
+                            contains:
+                              kubernetes.container.name: postgres
+                          tokenizer: "%{timestamp} %{+timestamp} %{level}: %{message}"
+                          field: "message"
+                          target_prefix: "json"
+                      - dissect:
+                          when:
+                            contains:
+                              kubernetes.container.name: postgres
+                          tokenizer: "%{timestamp} %{+timestamp} %{id} %{level} %{message}"
+                          field: "message"
+                          target_prefix: "json"
+                      - dissect:
+                          when:
+                            contains:
+                              kubernetes.container.name: postgres
+                          tokenizer: "%{timestamp} %{+timestamp} %{level}: %{message}"
+                          field: "message"
+                          target_prefix: "json"
+                      - dissect:
+                          when:
+                            contains:
                               kubernetes.container.name: odyssey
                           tokenizer: "[%{timestamp}] %{level} %{context} %{database} %{connection} %{message}"
                           field: "message"
                           target_prefix: "json"
                       - drop_event:
                           when:
-                            equals:
-                              json.context: console
-                      - drop_event:
-                          when:
-                            equals:
-                              json.context: auth
-                      - drop_event:
-                          when:
-                            equals:
-                              json.level: info
+                            or:
+                            - regexp:
+                                json.context: "auth|console"
+                            - regexp:
+                                json.level: "LOG|INFO|info"
       output.elasticsearch:
         host: '${NODE_NAME}'
         hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master.logging.svc:9200}'
         filebeat.registry.flush: 2s
       logging.metrics.enabled: false
-      logging.level: warning
+      logging.level: error

@@ -2,11 +2,11 @@
 daemonset:
   resources:
     limits:
-      cpu: 500m
-      memory: 500Mi
+      cpu: 300m
+      memory: 300Mi
     requests:
-      cpu: 100m
-      memory: 100Mi
+      cpu: 50m
+      memory: 50Mi
 
 affinity:
   nodeAffinity:
@@ -16,9 +16,7 @@ affinity:
         - key: node-role
           operator: In
           values:
-            - monitoring
             - postgres-failover
-            - prod
 
 imagePullSecrets:
 - name: infra-registry
